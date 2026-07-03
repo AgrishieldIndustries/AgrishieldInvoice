@@ -1,20 +1,13 @@
 import asyncio
 from datetime import date
 from sqlalchemy.future import select
-from app.core.database import Base, engine, SessionLocal
+from app.core.database import SessionLocal
 from app.core.security import get_password_hash
-# Import ALL models so Base.metadata knows about every table
 from app.models import (
-    User, UserRole, Customer, Product, CompanySettings,
-    Invoice, InvoiceItem, Payment, InventoryHistory, AuditLog
+    User, UserRole, Customer, Product, CompanySettings
 )
 
 async def seed_data():
-    print("Dropping and recreating all database tables...")
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
-
     print("Seeding database values...")
     async with SessionLocal() as session:
         # 1. Seed Admin User
@@ -48,7 +41,7 @@ async def seed_data():
                 name="Sanjay Patil",
                 shop_name="Sai Agro Agencies",
                 phone="9822114400",
-                gstin="27AAAPS1234A1Z0", # starts with 27 -> Maharashtra (Intra-state CGST+SGST)
+                gstin="27AAAPS1234A1Z0", # Maharashtra
                 billing_address="Ganesh Peth, Chakan, Pune, MH - 410501",
                 shipping_address="Ganesh Peth, Chakan, Pune, MH - 410501",
                 credit_limit=100000.00,
@@ -58,7 +51,7 @@ async def seed_data():
                 name="Ramesh Shinde",
                 shop_name="Balaji Fertilizers",
                 phone="9860405060",
-                gstin="27AAAPB5678A1Z5", # starts with 27 -> Maharashtra (Intra-state CGST+SGST)
+                gstin="27AAAPB5678A1Z5", # Maharashtra
                 billing_address="Market Yard, Nashik, MH - 422001",
                 shipping_address="Market Yard, Nashik, MH - 422001",
                 credit_limit=150000.00,
@@ -68,7 +61,7 @@ async def seed_data():
                 name="Malleshappa Biradar",
                 shop_name="Kisan Krishi Seva Kendra",
                 phone="9980556677",
-                gstin="29AAAPK1212B1Z1", # starts with 29 -> Karnataka (Inter-state IGST)
+                gstin="29AAAPK1212B1Z1", # Karnataka
                 billing_address="Main Road, Bidar, KA - 585401",
                 shipping_address="Main Road, Bidar, KA - 585401",
                 credit_limit=80000.00,
