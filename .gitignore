@@ -1,0 +1,24 @@
+# Environment
+.env
+*.env
+
+# SQLite local database
+*.db
+*.sqlite
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Alembic
+alembic/versions/*.pyc
+
+# Misc
+.DS_Store
+*.log
