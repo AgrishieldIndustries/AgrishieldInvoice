@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "==> Environment variables present:"
+env | cut -d= -f1 | sort
+
 echo "==> Running database migrations..."
 alembic upgrade head
 
